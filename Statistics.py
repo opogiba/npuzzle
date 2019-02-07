@@ -11,6 +11,10 @@ class Statistics():
         i = 0
 
         for el in list_of_solution:
+            if i == 0:
+                i += 1
+                print()
+                continue
             print('Move N', i)
             print(el)
             print()

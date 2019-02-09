@@ -2,7 +2,7 @@ import argparse
 from uttils import make_arguments
 from generator import generate_npuzle
 from NpuzzleState import NpuzzleState
-from Queue import StateAnalyzeQueue, StateDeletedQueue
+from NpuzzleQueue import StateAnalyzeQueue, StateDeletedQueue
 from Statistics import Statistics
 import time
 

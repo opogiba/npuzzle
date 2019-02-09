@@ -1,4 +1,5 @@
-class Statistics():
+class Statistics:
+
     time_complexity = 0
     size_complexity = 0
     moves = 0

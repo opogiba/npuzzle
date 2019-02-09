@@ -21,7 +21,7 @@ def basic_check(npuzzle, size):
 
 #TODO CHANGE IT change help field
 def make_arguments(parser):
-    parser.add_argument("-size", type=int, help="Size of the puzzle's side. Must be >= 3.", default=3, dest='size')
+    parser.add_argument("-size", type=int, help="Map size, >= 3", default=3, dest='size')
     parser.add_argument("-s", "--solvable", action="store_true", default=False,
                         help="Forces generation of a solvable puzzle. Overrides -u.")
     parser.add_argument("-u", "--unsolvable", action="store_true", default=False,
@@ -100,29 +100,27 @@ def str_from_file_to_numpy_array(args):
 
     return npuzzle
 
-#TODO change function
-def is_solvable(numpy_puzzle, size):
-    inversions = 0
-    flat_map = numpy_puzzle.flatten()
+#  TODO change function for readability
 
-    for i, puzzle in enumerate(flat_map):
+
+def is_solvable(npuzzle_map_numpy, size):
+    inversions = 0
+    array_map = npuzzle_map_numpy.flatten()
+
+    for i, puzzle in enumerate(array_map):
         if puzzle == 0:
             continue
-        for elem in flat_map[:i]:
+        for elem in array_map[:i]:
             if elem > puzzle:
                 inversions += 1
 
-    is_inversions_even = True if inversions % 2 == 0 else False
+    is_inversions_even = inversions % 2 == 0
 
     if size % 2 != 0:
         return not is_inversions_even
-    if 0 in numpy_puzzle[::-2]:
+    if 0 in npuzzle_map_numpy[::-2]:
         return is_inversions_even
-    elif 0 in numpy_puzzle[::2]:
+    elif 0 in npuzzle_map_numpy[::2]:
         return not is_inversions_even
     return False
-
-
-
-
 

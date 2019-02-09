@@ -1,17 +1,27 @@
 import numpy
+import NpuzzleState
 
-#TODO change it
-def manhattan_h(state):
-    manhattan_sum = 0
+#TODO change it, it should be more readable
 
-    for indx_pair, value in numpy.ndenumerate(state.state):
-        for t_indx_pair, t_value in numpy.ndenumerate(state.final_terminal_state):
-            if value == t_value:
-                diff = numpy.subtract(indx_pair, t_indx_pair)
-                abs_diff = abs(diff)
-                manhattan_sum += sum(abs_diff)
+
+def manhattan_heuristic(state: NpuzzleState):
+    distance = 0
+    for tuple_index_to_solve, to_solve_value in numpy.ndenumerate(state.state):
+        for tuple_index_goal, t_value in numpy.ndenumerate(state.final_terminal_state):
+            if to_solve_value == t_value:
+                diff = numpy.subtract(tuple_index_to_solve, tuple_index_goal)
+                distance += sum(abs(diff))
                 break
-    return manhattan_sum
+    return distance
+
+
+def hemming_heuristic(state: NpuzzleState):
+    # TODO: is it good?
+    return len(numpy.not_equal(state.state, state.final_terminal_state))
+
+
+def u_h(state):
+    pass
 
 
 def heuristic_choise(heuristics, state):
@@ -19,13 +29,13 @@ def heuristic_choise(heuristics, state):
         return 0
 
     if heuristics is 'M':
-        return manhattan_h(state)
+        return manhattan_heuristic(state)
 
     if heuristics is 'ML':
         pass
 
     if heuristics is 'H':
-        pass
+        return hemming_heuristic(state)
 
     if heuristics is 'E':
         pass

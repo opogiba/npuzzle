@@ -52,7 +52,7 @@ class NpuzzleState():
         cls.heuristic = heuristic
 
     def __str__(self):
-        return ' ' + str(self.state).replace('[[', ' ').replace(']]', ' ').replace('[', '').replace(']', '').strip()
+        return str(self.state).replace('[[', ' ').replace(']]', ' ').replace('[', '').replace(']', '')
 
     def __repr__(self):
         return self.__str__()
